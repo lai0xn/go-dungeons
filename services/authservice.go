@@ -89,12 +89,11 @@ func GenerateToken(user *domain.User) (string, error) {
 
 func VerifyToken(tokenString string) *jwt.Token {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		return "this is the secret key", nil
+		return []byte("this is the secret key"), nil
 	})
 	if err != nil {
 		return nil
 	}
-
 	if !token.Valid {
 		return nil
 	}
